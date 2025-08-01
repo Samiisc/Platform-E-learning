@@ -1,0 +1,61 @@
+Application java pour gérer une plateforme d'apprentissage en ligne. Cette plateforme permet de gerer des cours, des etudiants, des formateurd.
+
+
+Gestion PlatformeApprentissage/
+├── src/
+│   ├── entities/
+│   │   ├── User.java               # Classe abstraite
+│       ├──         Attribue proteger: id, nom, prenom, email, dateInscription
+│       ├──         Methodes Abstraites: getRole(); calculerStatidtiques()
+│       └──         Methodes Concrètes: seConnecter(); seDeconnecter; to String()
+│   │   ├── Etudiant.java       # Hérite de User : numEtudiant, Niveau, coursInscription, MoyenneGeneral
+│   │   ├── Formateur.java      # Hérite de User : NumeroEmploye, specialite, coursEnseignes, salaire
+│   │   ├── Administrateur.java     # Hérite de User : droitsAcces, departement
+│   │   └── Evaluable.java              # Interface Evaluable
+│       └──          Methodes : calculerNote(); estValide(); genererCertificat()
+│
+│   ├── models/
+│   │   ├── Metier.java				    # Classe Metier
+│   │   ├── Cours.java				# Code, titre, description, formateur, etudiants, dureeHeures
+│   │   ├── Module.java			# nom, contenu, cours, note, dateEvaluation, commentaire
+│   │   └── Evaluation.java				# etudiant, cours, note, dateEvaluation, commentaire
+│   │   └── Plateforme.java     # nom, utilisateurs, cours, evaluations
+│
+│
+│   ├── ui/
+│   │   │   ├──
+│   │   │   ├──
+│   │   │   ├──
+│   │   │   └──
+│
+│   ├── database/
+│   │   └── DatabaseManager.java       # Connexion à SQLite
+│
+│   └── Main.java                      # Point d’entrée + menu interactif CLI
+
+
+├──   Fonctionnalités à implémenter au cours de ce Projets
+│
+│   ├── Gestion des Utilisateurs
+│   │   │   ├── inscriptions étudiants avec validation des données
+│   │   │   ├──  Gestion des formateurs (ajout, modification, suppression)
+│   │   │   ├── Authentification simple (mail/ mot de passe)
+│   │   │   └── Profil utilisateur avec historique des données
+│
+│   ├── Gestion des cours
+│   │   │   ├── Création de cours par les formateurs
+│   │   │   ├── Inscription des étudiants aux cours (Max 30 étudiants/ cours)
+│   │   │   ├── Gestion des modules (ajout, modification, suppression)
+│   │   │   └── Recherche de cours par titre, formateur ou catégorie
+│
+│   ├── Système d'évaluation
+│   │   │   ├── Saisie des notes par les formateurs
+│   │   │   ├── Calcule des Moyennes par cours et géneral
+│   │   │   ├── Génération de bulletins pour les étudiants
+│   │   │   └── Statistiques : taux de réussite, moyennes par cours
+│
+│   ├── Fonctionnalités avancées
+│   │   │   ├── Gestion des exceptions personnalisées
+│   │   │   ├── Menu interactif avec navigation claire
+│   │   │   ├── Sauvegarde/Chargement des données(facultatifs)
+│   │   │   └── Validation robuste des entrees utilisateur

@@ -1,0 +1,97 @@
+@startuml
+
+' === Interfaces ===
+interface Evaluable {
+    +calculerNote(): double
+    +estValide(): boolean
+    +genererCertificat(): String
+}
+
+' === Classe abstraite User ===
+abstract class User {
+    - id: int
+    - nom: String
+    - prenom: String
+    - email: String
+    - dateInscription: LocalDate
+
+    +seConnecter(): void
+    +seDeconnecter(): void
+    +toString(): String
+    +getRole(): String
+    +calculerStatistiques(): String
+}
+
+' === Sous-classes de User ===
+class Etudiant {
+    - numEtudiant: String
+    - niveau: String
+    - coursInscrits: List<Cours>
+    - moyenneGenerale: double
+}
+
+class Formateur {
+    - numeroEmploye: String
+    - specialite: String
+    - coursEnseignes: List<Cours>
+    - salaire: double
+}
+
+class Administrateur {
+    - droitsAcces: String
+    - departement: String
+}
+
+' === Entités principales ===
+class Cours {
+    - code: String
+    - titre: String
+    - description: String
+    - formateur: Formateur
+    - etudiants: List<Etudiant>
+    - dureeHeures: int
+}
+
+class Module {
+    - nom: String
+    - contenu: String
+    - note: double
+    - dateEvaluation: LocalDate
+    - commentaire: String
+}
+
+class Evaluation {
+
+    - note: double
+    - dateEvaluation: LocalDate
+    - commentaire: String
+}
+
+class Plateforme {
+    - nom: String
+    - utilisateurs: List<User>
+    - cours: List<Cours>
+    - evaluations: List<Evaluation>
+}
+
+class Metier {
+    ' méthodes métiers (inscriptions, calculs, etc.)
+}
+
+' === Relations ===
+User <|-- Etudiant
+User <|-- Formateur
+User <|-- Administrateur
+
+Etudiant ..|> Evaluable
+Evaluation ..> Cours
+Evaluation ..> Etudiant
+Module --> Cours
+Cours --> Formateur
+Cours --> "0..*" Etudiant
+Plateforme --> "0..*" Cours
+Plateforme --> "0..*" Evaluation
+Plateforme --> "0..*" User
+
+
+@enduml
